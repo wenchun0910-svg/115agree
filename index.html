@@ -110,7 +110,7 @@
                     <div class="space-y-6">
                         <div>
                             <div class="flex justify-between text-sm mb-2 items-end">
-                                <span class="text-sakura-dark font-bold"><i class="fa-solid fa-venus mr-1"></i>女子 <span class="text-xs text-gray-400 font-normal">368名</span></span>
+                                <span class="text-sakura-dark font-bold"><i class="fa-solid fa-venus mr-1"></i>女生 <span class="text-xs text-gray-400 font-normal">368名</span></span>
                                 <span class="text-ink font-bold">15.22% <span class="text-xs text-gray-500 font-normal">(56名)</span></span>
                             </div>
                             <div class="w-full bg-sakura/30 rounded-full h-2 overflow-hidden">
@@ -132,7 +132,7 @@
                 <!-- Highlight Stats -->
                 <div class="card p-8">
                     <h2 class="text-lg font-bold text-ink mb-6 flex items-center">
-                        <span class="w-1 h-5 bg-yellow-600 rounded-full mr-2"></span> 重點洞察
+                        <span class="w-1 h-5 bg-yellow-600 rounded-full mr-2"></span> 查詢
                     </h2>
                     <ul class="space-y-4 text-sm text-gray-600">
                         <li class="flex items-start bg-white/50 p-2 rounded-lg">
@@ -233,7 +233,7 @@
             
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-8 relative z-10">
                 <select id="classSelect" class="block w-full sm:w-72 pl-4 pr-10 py-3 text-sm font-medium text-ink bg-white/80 border border-wood/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-matcha/50 focus:border-matcha/50 shadow-sm appearance-none cursor-pointer transition-all">
-                    <option value="" disabled selected>▾ クラスを選択 (選擇班級)</option>
+                    <option value="" disabled selected>▾選擇班級</option>
                     <!-- Options will be populated by JS -->
                 </select>
             </div>
@@ -242,15 +242,15 @@
             <div id="classResultArea" class="hidden relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div class="bg-white/60 p-6 rounded-2xl border border-wood/40 text-center">
-                        <div class="text-xs text-gray-400 font-bold tracking-widest mb-2">在籍生徒數</div>
+                        <div class="text-xs text-gray-400 font-bold tracking-widest mb-2">學生人數</div>
                         <div class="text-4xl font-bold text-ink"><span id="resTotal">-</span><span class="text-sm font-normal text-gray-400 ml-1">名</span></div>
                     </div>
                     <div class="bg-matcha-light/20 p-6 rounded-2xl border border-matcha-light/40 text-center">
-                        <div class="text-xs text-matcha font-bold tracking-widest mb-2">同意生徒數</div>
+                        <div class="text-xs text-matcha font-bold tracking-widest mb-2">同意人數</div>
                         <div class="text-4xl font-bold text-matcha"><span id="resConsent">-</span><span class="text-sm font-normal text-matcha/70 ml-1">名</span></div>
                     </div>
                     <div class="bg-white/60 p-6 rounded-2xl border border-wood/40 text-center">
-                        <div class="text-xs text-gray-400 font-bold tracking-widest mb-2">同意割合</div>
+                        <div class="text-xs text-gray-400 font-bold tracking-widest mb-2">百分比</div>
                         <div id="resRate" class="text-4xl font-bold text-ink">-</div>
                     </div>
                 </div>
