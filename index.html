@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行動載具同意書統計儀表板</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'washi': '#FDFBF7', // Washi paper color
+                        'matcha': '#8B9B7E',
+                        'matcha-light': '#D4DEC9',
+                        'sakura': '#E8D3D8',
+                        'sakura-dark': '#C58392',
+                        'ink': '#2C302E',
+                        'wood': '#DCD3C6',
+                        'sora': '#9BB2C1' // Soft sky blue
+                    },
+                    fontFamily: {
+                        'japanese': ['"Kosugi Maru"', '"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Kosugi Maru', 'Noto Sans TC', sans-serif;
+            background-color: #FDFBF7; /* Washi background */
+            color: #2C302E;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23dcd3c6" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); /* Subtle texture */
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(220, 211, 198, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .heading-badge {
+            display: inline-block;
+            background-color: #8B9B7E;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+        <header class="card p-8 flex flex-col md:flex-row items-center justify-between">
+            <div class="text-center md:text-left">
+                <div class="heading-badge mb-3">令和最新版</div>
+                <h1 class="text-3xl font-bold text-ink"><i class="fa-solid fa-tablet-screen-button text-matcha mr-3"></i>行動載具同意書統計</h1>
+                <p class="text-gray-500 mt-2 text-sm tracking-wide">全校データ統計とクラス別検索</p>
+            </div>
+            <div class="mt-6 md:mt-0 flex gap-4 text-center">
+                <div class="bg-white/60 px-6 py-4 rounded-2xl border border-wood/40">
+                    <div class="text-xs text-gray-500 font-bold tracking-widest mb-1">總人數</div>
+                    <div class="text-3xl font-bold text-ink">753<span class="text-sm font-normal text-gray-400 ml-1">名</span></div>
+                </div>
+                <div class="bg-matcha-light/30 px-6 py-4 rounded-2xl border border-matcha-light/50">
+                    <div class="text-xs text-matcha font-bold tracking-widest mb-1">已同意</div>
+                    <div class="text-3xl font-bold text-matcha">104<span class="text-sm font-normal text-matcha/70 ml-1">名</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card p-8 col-span-1 flex flex-col justify-center items-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-matcha-light/20 rounded-bl-full -mr-4 -mt-4"></div>
+                <h2 class="text-lg font-bold text-ink mb-6 w-full text-left flex items-center">
+                    <span class="w-1 h-5 bg-matcha rounded-full mr-2"></span> 整體同意率
+                </h2>
+                <div class="relative w-44 h-44">
+                    <svg class="w-full h-full transform -rotate-90 drop-shadow-sm" viewBox="0 0 36 36">
+                        <path class="text-wood/30" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="text-matcha" stroke-dasharray="13.81, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                        <div class="text-3xl font-bold text-ink tracking-tighter">13.81<span class="text-lg">%</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Gender Stats -->
+                <div class="card p-8">
+                    <h2 class="text-lg font-bold text-ink mb-6 flex items-center">
+                        <span class="w-1 h-5 bg-sakura-dark rounded-full mr-2"></span> 性別分析
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2 items-end">
+                                <span class="text-sakura-dark font-bold"><i class="fa-solid fa-venus mr-1"></i>女子 <span class="text-xs text-gray-400 font-normal">368名</span></span>
+                                <span class="text-ink font-bold">15.22% <span class="text-xs text-gray-500 font-normal">(56名)</span></span>
+                            </div>
+                            <div class="w-full bg-sakura/30 rounded-full h-2 overflow-hidden">
+                                <div class="bg-sakura-dark h-full rounded-full" style="width: 15.22%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2 items-end">
+                                <span class="text-sora font-bold"><i class="fa-solid fa-mars mr-1"></i>男子 <span class="text-xs text-gray-400 font-normal">385名</span></span>
+                                <span class="text-ink font-bold">12.47% <span class="text-xs text-gray-500 font-normal">(48名)</span></span>
+                            </div>
+                            <div class="w-full bg-sora/20 rounded-full h-2 overflow-hidden">
+                                <div class="bg-sora h-full rounded-full" style="width: 12.47%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlight Stats -->
+                <div class="card p-8">
+                    <h2 class="text-lg font-bold text-ink mb-6 flex items-center">
+                        <span class="w-1 h-5 bg-yellow-600 rounded-full mr-2"></span> 重點洞察
+                    </h2>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li class="flex items-start bg-white/50 p-2 rounded-lg">
+                            <div class="bg-matcha-light/50 w-6 h-6 rounded-full flex items-center justify-center mr-3 mt-0.5 shrink-0">
+                                <i class="fa-solid fa-arrow-up text-matcha text-xs"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-gray-400">最高年級</span>
+                                <span class="font-bold text-ink">四年級 (21.05%)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white/50 p-2 rounded-lg">
+                            <div class="bg-red-100 w-6 h-6 rounded-full flex items-center justify-center mr-3 mt-0.5 shrink-0">
+                                <i class="fa-solid fa-arrow-down text-red-400 text-xs"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-gray-400">最低年級</span>
+                                <span class="font-bold text-ink">一年級 (4.71%)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white/50 p-2 rounded-lg">
+                            <div class="bg-yellow-100 w-6 h-6 rounded-full flex items-center justify-center mr-3 mt-0.5 shrink-0">
+                                <i class="fa-solid fa-crown text-yellow-600 text-xs"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-gray-400">最高班級</span>
+                                <span class="font-bold text-ink">四年五班 (39.13%)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-8 overflow-x-auto">
+            <h2 class="text-lg font-bold text-ink mb-6 flex items-center">
+                <span class="w-1 h-5 bg-wood rounded-full mr-2"></span> 各學年數據
+            </h2>
+            <table class="min-w-full">
+                <thead>
+                    <tr class="border-b border-wood/50">
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 tracking-widest uppercase">學年</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 tracking-widest uppercase">在籍人數</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 tracking-widest uppercase">同意數</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 tracking-widest uppercase">割合 (比例)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-wood/20">
+                    <tr class="hover:bg-white/50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-ink">一年級</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">85</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4.71%</td>
+                    </tr>
+                    <tr class="hover:bg-white/50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-ink">二年級</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">112</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">9</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">8.04%</td>
+                    </tr>
+                    <tr class="hover:bg-white/50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-ink">三年級</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">131</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">18</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">13.74%</td>
+                    </tr>
+                    <tr class="bg-matcha-light/10 border-l-4 border-matcha hover:bg-matcha-light/20 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-matcha pl-5">四年級</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">133</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">28</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-matcha">21.05%</td>
+                    </tr>
+                    <tr class="hover:bg-white/50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-ink">五年級</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">144</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">13.89%</td>
+                    </tr>
+                    <tr class="hover:bg-white/50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-ink">六年級</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">148</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">16.89%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card p-8 relative overflow-hidden">
+             <!-- Decorative elements -->
+            <div class="absolute -bottom-10 -right-10 text-matcha-light/20">
+                <i class="fa-solid fa-seedling text-9xl"></i>
+            </div>
+            
+            <h2 class="text-lg font-bold text-ink mb-6 flex items-center relative z-10">
+                <span class="w-1 h-5 bg-ink rounded-full mr-2"></span> 班級詳細查詢
+            </h2>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-8 relative z-10">
+                <select id="classSelect" class="block w-full sm:w-72 pl-4 pr-10 py-3 text-sm font-medium text-ink bg-white/80 border border-wood/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-matcha/50 focus:border-matcha/50 shadow-sm appearance-none cursor-pointer transition-all">
+                    <option value="" disabled selected>▾ クラスを選択 (選擇班級)</option>
+                    <!-- Options will be populated by JS -->
+                </select>
+            </div>
+
+            <!-- Result Area -->
+            <div id="classResultArea" class="hidden relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white/60 p-6 rounded-2xl border border-wood/40 text-center">
+                        <div class="text-xs text-gray-400 font-bold tracking-widest mb-2">在籍生徒數</div>
+                        <div class="text-4xl font-bold text-ink"><span id="resTotal">-</span><span class="text-sm font-normal text-gray-400 ml-1">名</span></div>
+                    </div>
+                    <div class="bg-matcha-light/20 p-6 rounded-2xl border border-matcha-light/40 text-center">
+                        <div class="text-xs text-matcha font-bold tracking-widest mb-2">同意生徒數</div>
+                        <div class="text-4xl font-bold text-matcha"><span id="resConsent">-</span><span class="text-sm font-normal text-matcha/70 ml-1">名</span></div>
+                    </div>
+                    <div class="bg-white/60 p-6 rounded-2xl border border-wood/40 text-center">
+                        <div class="text-xs text-gray-400 font-bold tracking-widest mb-2">同意割合</div>
+                        <div id="resRate" class="text-4xl font-bold text-ink">-</div>
+                    </div>
+                </div>
+                
+                <div class="px-2">
+                    <div class="flex justify-between text-xs text-gray-400 mb-2">
+                        <span>0%</span>
+                        <span id="resComparison" class="text-right"></span>
+                    </div>
+                    <div class="w-full bg-wood/30 rounded-full h-3 mb-4 overflow-hidden shadow-inner">
+                        <div id="resProgressBar" class="bg-matcha h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="text-center py-16 relative z-10">
+                <div class="text-wood/60 mb-4">
+                    <i class="fa-regular fa-folder-open text-5xl"></i>
+                </div>
+                <p class="text-gray-500 text-sm">請從上方選單選擇一個班級以查看詳細數據</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Data derived from the python analysis
+        const overallRate = 13.81;
+        const classData = {
+            "一年一班": { total: 20, consent: 2 }, "一年二班": { total: 23, consent: 0 }, "一年三班": { total: 21, consent: 1 }, "一年四班": { total: 21, consent: 1 },
+            "二年一班": { total: 21, consent: 2 }, "二年二班": { total: 23, consent: 2 }, "二年三班": { total: 22, consent: 2 }, "二年四班": { total: 22, consent: 0 }, "二年五班": { total: 24, consent: 3 },
+            "三年一班": { total: 27, consent: 2 }, "三年二班": { total: 26, consent: 0 }, "三年三班": { total: 26, consent: 2 }, "三年四班": { total: 26, consent: 0 }, "三年五班": { total: 26, consent: 9 },
+            "四年一班": { total: 21, consent: 4 }, "四年二班": { total: 22, consent: 6 }, "四年三班": { total: 23, consent: 5 }, "四年四班": { total: 22, consent: 2 }, "四年五班": { total: 23, consent: 9 }, "四年六班": { total: 22, consent: 2 },
+            "五年一班": { total: 24, consent: 5 }, "五年二班": { total: 23, consent: 3 }, "五年三班": { total: 25, consent: 4 }, "五年四班": { total: 24, consent: 3 }, "五年五班": { total: 24, consent: 1 }, "五年六班": { total: 24, consent: 4 },
+            "六年一班": { total: 26, consent: 3 }, "六年二班": { total: 24, consent: 2 }, "六年三班": { total: 23, consent: 8 }, "六年四班": { total: 25, consent: 9 }, "六年五班": { total: 25, consent: 3 }, "六年六班": { total: 25, consent: 0 }
+        };
+
+        // Populate dropdown
+        const selectElement = document.getElementById('classSelect');
+        const classes = Object.keys(classData).sort();
+        
+        classes.forEach(className => {
+            const option = document.createElement('option');
+            option.value = className;
+            option.textContent = className;
+            selectElement.appendChild(option);
+        });
+
+        // Handle selection
+        selectElement.addEventListener('change', function() {
+            const selectedClass = this.value;
+            const data = classData[selectedClass];
+            
+            if (data) {
+                const rate = ((data.consent / data.total) * 100).toFixed(2);
+                
+                // Reset progress bar to 0 before animating
+                document.getElementById('resProgressBar').style.width = '0%';
+                
+                // Update UI elements
+                document.getElementById('resTotal').textContent = data.total;
+                document.getElementById('resConsent').textContent = data.consent;
+                document.getElementById('resRate').textContent = rate + '%';
+                
+                // Animate progress bar with slight delay for visual effect
+                setTimeout(() => {
+                    document.getElementById('resProgressBar').style.width = rate + '%';
+                    
+                    // Style adjustments based on rate
+                    let barClass = 'h-full rounded-full transition-all duration-1000 ease-out ';
+                    if(parseFloat(rate) === 0) {
+                        barClass += 'bg-wood';
+                    } else if(parseFloat(rate) > overallRate) {
+                        barClass += 'bg-matcha';
+                    } else {
+                        barClass += 'bg-sora';
+                    }
+                    document.getElementById('resProgressBar').className = barClass;
+                }, 100);
+
+                // Add comparison text
+                let compText = "";
+                if(parseFloat(rate) === 0) {
+                    compText = "尚無同意紀錄";
+                } else if(parseFloat(rate) > overallRate) {
+                    compText = `平均より高い (<span class="text-matcha font-bold">高於</span>全校平均 ${overallRate}%)`;
+                } else {
+                    compText = `平均より低い (<span class="text-sora font-bold">低於</span>全校平均 ${overallRate}%)`;
+                }
+                document.getElementById('resComparison').innerHTML = compText;
+
+                // Toggle visibility
+                document.getElementById('emptyState').classList.add('hidden');
+                document.getElementById('classResultArea').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
