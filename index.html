@@ -337,9 +337,9 @@
                 if(parseFloat(rate) === 0) {
                     compText = "尚無同意紀錄";
                 } else if(parseFloat(rate) > overallRate) {
-                    compText = `平均より高い (<span class="text-matcha font-bold">高於</span>全校平均 ${overallRate}%)`;
+                    compText = ` (<span class="text-matcha font-bold">高於</span>全校平均 ${overallRate}%)`;
                 } else {
-                    compText = `平均より低い (<span class="text-sora font-bold">低於</span>全校平均 ${overallRate}%)`;
+                    compText = `(<span class="text-sora font-bold">低於</span>全校平均 ${overallRate}%)`;
                 }
                 document.getElementById('resComparison').innerHTML = compText;
 
